@@ -1,9 +1,18 @@
-<h4> Bienvenidos {{username}}, click to select channel below [<a href="#">SIGN OUT</a>]</h4>
+<h4> We would like to Welcome, {{data.username}}, click to select channel below [<a href="#/join">SIGN OUT</a>]</h4>
 
 <!--   FOR THE CHANNELS -->
   <ul class="list-unstyled list-inline">
-    <li class="roomlabel" ng-repeat="channel in channels"></li>
-    <li class="roomlabel"></li>
+  <!-- loop through results $scope.channels channel is the iteration var-->
+    <li class='roomlabel' ng-repeat='channel in channels'>
+<!--if it is selected channel, we want to add the class label success! if not, grey background(bootstrap classes) -->
+      <a class='btn btn-info' href='' ng-class="{'label-default': user != data.username, 'label-default': (channel != selectedChannel), 'label-success':(channel == selectedChannel)}" ng-click='subscribe(channel)'>
+      <!--ABOVE: ngClick is going to the subscribe function and pass in the channel (coming from var iteration)-->
+    <i class='fa' ng-class="{'fa-spin':(channel == selectedChannel), 'fa-spinner':(channel == selectedChannel), 'fa-comments':(channel != selectedChannel)}"></i>
+    <!--text for actual channel/room -->
+    {{channel}}
+    </a>
+    </li>
+    <li class="roomlabel">
       <a class="btn btn-default" href="" ng-click="showCreate = !showCreate">
         <i class="fa fa-magic"></i> Create New!
       </a>  
@@ -11,28 +20,35 @@
 <!--CHANNEL-->
 <!--      CREATING-->
 <!--              FORM  -->
-    <div ng-show="showCreate">
-      <form ng-submit='createChannel()'>
-        <h6>Create New chatRoom</h6>
-          <div class="input-group">
-            <input class="input-sm form-control" ng-model="newChannel" placeholder="Room Name" type="text">
-              <span class="input-group-btn">
-                <input class="input-sm btn btn-default" type="submit" value="Go!">
+  <div ng-show='showCreate'>
+        <form ng-submit='createChannel()'>
+            <h6>Create New Room</h6>
+            <div class='input-group'>
+            <!-- from main.js controller channel = $scope.newChannel; -->
+            <input class='input-sm form-control' ng-model='newChannel' placeholder='Room Name' type='text'>
+              <span class='input-group-btn'>
+                  <input class='input-sm btn btn-default' type='submit' value='Go!'>
               </span>
-          </div>
-          <br>
-          <br>
-      </form>
-    </div>
-  </ul>
-  <br>
+            </div>
+            <br>
+            <br>
+        </form>
+  </div>
+</ul>
+<br>
 
     <div class="row">
       
       <div class="col-md-2"><!--USER LIST-->
         <small class="marker">Users in Room</small>
           <ul class="list-unstyled">
-            <li ng-repeat="user in users"></li>
+            <li ng-repeat='user in users'>
+<!--ngClass for our CSS class, set to label default if is the user it will be label success"green" title for city,will show when hoover -->
+              <span class='label btn-mini userlabel' ng-class="{'label-default': user != data.username, 'label-success': (user == data.username)}" title='(Location: {{userData[user].city || "unknown"}})'>
+                <i class='fa fa-user'></i>
+                {{user}}
+              </span>
+            </li>
           </ul>
       </div>
       <div class="col-md-10"><!--MAIN CHAT-->
