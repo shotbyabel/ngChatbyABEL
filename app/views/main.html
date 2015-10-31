@@ -1,0 +1,63 @@
+<h4> Bienvenidos {{username}}, click to select channel below [<a href="#">SIGN OUT</a>]</h4>
+
+<!--   FOR THE CHANNELS -->
+  <ul class="list-unstyled list-inline">
+    <li class="roomlabel" ng-repeat="channel in channels"></li>
+    <li class="roomlabel"></li>
+      <a class="btn btn-default" href="" ng-click="showCreate = !showCreate">
+        <i class="fa fa-magic"></i> Create New!
+      </a>  
+    </li>
+<!--CHANNEL-->
+<!--      CREATING-->
+<!--              FORM  -->
+    <div ng-show="showCreate">
+      <form ng-submit='createChannel()'>
+        <h6>Create New chatRoom</h6>
+          <div class="input-group">
+            <input class="input-sm form-control" ng-model="newChannel" placeholder="Room Name" type="text">
+              <span class="input-group-btn">
+                <input class="input-sm btn btn-default" type="submit" value="Go!">
+              </span>
+          </div>
+          <br>
+          <br>
+      </form>
+    </div>
+  </ul>
+  <br>
+
+    <div class="row">
+      
+      <div class="col-md-2"><!--USER LIST-->
+        <small class="marker">Users in Room</small>
+          <ul class="list-unstyled">
+            <li ng-repeat="user in users"></li>
+          </ul>
+      </div>
+      <div class="col-md-10"><!--MAIN CHAT-->
+        
+        <form ng-submit="publish()"> <!--for publish function()-->
+          <div class="input-group">
+            <input class="input-sm form-control" ng-model="newMessage" type"text"
+            placeholder="Type a message..."><!--newMessage-->
+              <span class="input-group-btn">
+            <input class="input-sm btn btn-default" type="submit" value="Send">
+             </span>
+          </div>
+        </form>
+          <br>
+          <!--CHAT BOX-->
+        <div class="well chatbox" id="chat_history">
+          <ul class="list=unstyled">
+            <li ng-repeat="message in messages"> <!--ngRepeat to loop through messages-->
+              <i class="fa fa-comment"></i>
+
+              &nbsp;
+              {{message}}
+              </li>
+          </ul>
+        </div>  
+
+      </div><!--MAIN CHAT-->
+     </div> 
