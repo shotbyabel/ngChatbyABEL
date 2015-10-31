@@ -15,21 +15,23 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'pubnub.angular.service'
+
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        // controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/join', {
+        templateUrl: 'views/join.html',
+        controller: 'JoinCtrl',
+        // controllerAs: 'join'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/join'
       });
   });
